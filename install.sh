@@ -5,24 +5,37 @@
 ##############################
 selenium_server="selenium-server-standalone-2.53.0.jar"
 selenium_server_original="IHP6Qw"
-chromedriver_zipped="chromedriver_linux64.zip"
+chromedriver_zipped_linux="chromedriver_linux64.zip"
+chromedriver_zipped_mac="chromedriver_mac32.zip"
 chromedriver_unzipped="chromedriver"
+
 
 ##############################
 # Functions Declaration area #
 ##############################
-function uncompress_file {
-	unzip_installed=$(dpkg -s unzip | grep "Installed-Size")
-	if [[ ! $unzip_installed == *"Installed-Size"* ]]; then
-		echo " . Installing unzip package..." 
-		sudo apt-get -y install unzip
+function check_unzip_installed {
+	if [[ $1 == *"linux"* ]]; then
+		unzip_installed=$(dpkg -s unzip | grep "Installed-Size")
+		if [[ ! $unzip_installed == *"Installed-Size"* ]]; then
+			echo " . Installing unzip package..." 
+			sudo apt-get -y install unzip
+		fi
+	else
+		unzip_installed=$(brew list unzip | grep unzip)
+		if [[ ! $unzip_installed == *"unzip"* ]]; then
+			echo " . Installing unzip package..." 
+			brew install unzip
+		fi
 	fi
-	echo " . Unzipping the driver in linux..."
-	unzip chromedriver_linux64.zip
+}
+
+function uncompress_file {
+	echo " . Unzipping the driver for $1 and $2..."
+	unzip $2
 	echo " . Changing file permissions..."
 	chmod 777 $chromedriver_unzipped
 	echo " . Removing compressed file..."
-	rm $chromedriver_zipped
+	rm $2
 }
 
 function download_chromedriver {
@@ -73,23 +86,39 @@ else
 fi
 
 echo "Step 2. Download and uncompress the chrome driver if needed for $1"
-echo " . Checking if the chrome driver is present: $chromedriver_unzipped or $chromedriver_zipped"
+echo " . Checking if the chrome driver is present: $chromedriver_unzipped or $chromedriver_zipped_linux"
 if [[ $1 == *"linux"* ]]; then
+	os="linux"
 	if [ -f "$chromedriver_unzipped" ]; then
 		echo " . The chromedriver is already installed, no need to download."
 	else
 		echo " . $chromedriver_unzipped file was not found, checking for the compressed file..."
-		if [[ -f "$chromedriver_zipped" ]]; then 
-			echo " . $chromedriver_zipped was found, needs to uncompress..."
-			uncompress_file $chromedriver_zipped
+		if [[ -f "$chromedriver_zipped_linux" ]]; then 
+			echo " . $chromedriver_zipped_linux was found, needs to uncompress..."
+			uncompress_file $chromedriver_zipped_linux
 		else
 		  	echo " . The driver was not found, nor compressed or uncompressed, downloading the chrome drivers for linux"
-			download_chromedriver "linux"
-			uncompress_file $chromedriver_zipped
-
+			check_unzip_installed $os
+			download_chromedriver $os
+			uncompress_file $os $chromedriver_zipped_linux
 		fi
 	fi
 else
-  	echo "TODO: ... Download the chrome drivers for mac ..."
+	os="mac"
+  	if [ -f "$chromedriver_unzipped" ]; then
+		echo " . The chromedriver is already installed, no need to download."
+	else
+		echo " . $chromedriver_unzipped file was not found, checking for the compressed file..."
+		if [[ -f "$chromedriver_zipped_mac" ]]; then 
+			echo " . $chromedriver_zipped_mac was found, needs to uncompress..."
+			check_unzip_installed $os
+			uncompress_file $chromedriver_zipped_mac
+		else
+		  	echo " . The driver was not found, nor compressed or uncompressed, downloading the chrome drivers for linux"
+			download_chromedriver $os
+			check_unzip_installed $os
+			uncompress_file $os $chromedriver_zipped_mac
+		fi
+	fi
 fi
 echo "All done!"
