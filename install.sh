@@ -121,4 +121,13 @@ else
 		fi
 	fi
 fi
-echo "All done!"
+echo
+echo "##########################################################################################"
+echo "# To run the selenium server you should:                                                 #"
+echo "#    for firefox:                                                                        #"
+echo "# java -jar selenium-server-standalone-2.53.0.jar                                        #"
+echo "#     for chrome                                                                         #"
+echo "# java -jar selenium-server-standalone-2.53.0.jar -Dwebdriver.chrome.driver=chromedriver #"
+echo "##########################################################################################"
+echo
+

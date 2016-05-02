@@ -15,4 +15,4 @@ phantomjs:
       goutte: ~
       selenium2:
         wd_host: "http://localhost:8643/wd/hub"
-        javascript_session: selenium2
+        #javascript_session: selenium2
