@@ -2,8 +2,8 @@ Behat
 =====
 
 
-Intallation and execution
-=========================
+Automatic Installation
+======================
 
 To get the selenium server and the chrome driver, just run the install script like this:
 * Mac based
@@ -17,10 +17,10 @@ To get the selenium server and the chrome driver, just run the install script li
 </blockquote>
 
 
-# To do it manually you should:
+Manual Installation
+===================
 
-
-Manual Setup Behat for Firefox (default)
+Manual Setup for Firefox (default)
 ========================================
 
 * Get the selenium standalone server from here:
@@ -60,17 +60,18 @@ E.g. ~/projects/behat
 6. Match the behat.yml file should to this:
 <blockquote>
 default: <br>
-  extensions: <br>
-    Behat\MinkExtension\Extension: <br>
-      base_url: localhost:8000 <br>
-      browser_name: chrome <br>
-      goutte: ~ <br>
-      selenium2: ~ <br>
+__extensions: <br>
+____Behat\MinkExtension\Extension: <br>
+______base_url: localhost:8000 <br>
+______browser_name: chrome <br>
+______goutte: ~ <br>
+______selenium2: ~ <br>
 </blockquote>
 
 
-Start the selenium standalone
-========================================
+Start the selenium standalone server
+====================================
+Run in the terminal the following line:
 * For firefox:
 <blockquote>
 java -jar selenium-server-standalone-2.53.0.jar
