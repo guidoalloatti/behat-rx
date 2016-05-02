@@ -6,28 +6,28 @@ Intallation and execution
 =========================
 
 To get the selenium server and the chrome driver, just run the install script like this:
-# Mac based
+* Mac based
 <blockquote>
 ./install.sh mac
 </blockquote>
 
-# Linux based
+* Linux based
 <blockquote>
 ./install.sh linux
 </blockquote>
 
 
-* To do it manually you should:
+# To do it manually you should:
 
 
 Manual Setup Behat for Firefox (default)
 ========================================
 
-# Get the selenium standalone server from here:
+* Get the selenium standalone server from here:
 <blockquote>
 http://goo.gl/IHP6Qw
 </blockquote>
-# Rename it to selenium-server-standalone-2.53.0.jar if needed.
+* Rename it to selenium-server-standalone-2.53.0.jar if needed.
 
 
 Manual Setup for Chrome
@@ -71,11 +71,11 @@ default: <br>
 
 Start the selenium standalone
 ========================================
-# For firefox:
+* For firefox:
 <blockquote>
 java -jar selenium-server-standalone-2.40.0.jar
 </blockquote>
-# For chrome:
+* For chrome:
 <blockquote>
 java -jar selenium-server-standalone-2.40.0.jar -Dwebdriver.chrome.driver=chromedriver
 </blockquote>
