@@ -73,9 +73,9 @@ Start the selenium standalone
 ========================================
 * For firefox:
 <blockquote>
-java -jar selenium-server-standalone-2.40.0.jar
+java -jar selenium-server-standalone-2.53.0.jar
 </blockquote>
 * For chrome:
 <blockquote>
-java -jar selenium-server-standalone-2.40.0.jar -Dwebdriver.chrome.driver=chromedriver
+java -jar selenium-server-standalone-2.53.0.jar -Dwebdriver.chrome.driver=chromedriver
 </blockquote>
