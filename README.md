@@ -60,12 +60,12 @@ E.g. ~/projects/behat
 6. Match the behat.yml file should to this:
 <blockquote>
 default: <br>
-: extensions: <br>
-:: Behat\MinkExtension\Extension: <br>
-::: base_url: localhost:8000 <br>
-::: browser_name: chrome <br>
-::: goutte: ~ <br>
-::: selenium2: ~ <br>
+&nbsp;&nbsp;extensions: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;Behat\MinkExtension\Extension: <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;base_url: localhost:8000 <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;browser_name: chrome <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;goutte: ~ <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;selenium2: ~ <br>
 </blockquote>
 
 
