@@ -17,11 +17,8 @@ To get the selenium server and the chrome driver, just run the install script li
 </blockquote>
 
 
-Manual Installation
-===================
-
 Manual Setup for Firefox (default)
-========================================
+===============================================
 
 * Get the selenium standalone server from here:
 <blockquote>
@@ -30,8 +27,8 @@ http://goo.gl/IHP6Qw
 * Rename it to selenium-server-standalone-2.53.0.jar if needed.
 
 
-Manual Setup for Chrome
-=======================
+Manual Setup for Chrome (needs driver)
+======================================
 
 1. Download the Chrome driver from here:
 <blockquote>
