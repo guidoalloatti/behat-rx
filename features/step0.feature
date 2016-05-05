@@ -3,6 +3,9 @@ Feature: Step0 Validations
   As a website user
   I need to be able to complete step 0 
 
+  #######################################
+  # I am on the correct page validation #
+  #######################################
   @javascript
   Scenario: I am on the proper page
     Given I am on the homepage
@@ -14,6 +17,9 @@ Feature: Step0 Validations
     And I should see "I have read and agree to the Rxvantage Terms of Service"
     And I should see " Already on RxVantage?"
 
+  ############################################
+  # I cannot click the join rxvantage button #
+  ############################################
   @javascript
   Scenario: The Join RxVantage button should be disabled
     Given I am on the homepage
@@ -89,11 +95,31 @@ Feature: Step0 Validations
     Given I am on the homepage
     When I fill in "signup-company" with "a"
     Then I should see "Company name is too short."
+    And I should not see "Company is required."
+    And I should not see "Company was not found."
+    And I should see the input validation checkbox for "signup-company" as a red cross
+    And I should not see the input validation checkbox for "signup-company" as a green check
     When I fill in "signup-company" with ""
     Then I should see "Company is required."
+    And I should not see "Company name is too short."
+    And I should not see "Company was not found."
+    And I should see the input validation checkbox for "signup-company" as a red cross
+    And I should not see the input validation checkbox for "signup-company" as a green check
     When I fill in "signup-company" with "xeerasfdasdfasdf"
     And I wait for 3 seconds
     Then I should see "Company was not found."
+    And I should not see "Company is required."
+    And I should not see "Company name is too short."
+    And I should see the input validation checkbox for "signup-company" as a red cross
+    And I should not see the input validation checkbox for "signup-company" as a green check
+    When I fill in "signup-company" with "3M"
+    And I wait for 3 seconds
+    Then I should not see "Company was not found."
+    And I should not see "Company is required."
+    And I should not see "Company name is too short."
+    And I should not see the input validation checkbox for "signup-company" as a red cross
+    And I should see the input validation checkbox for "signup-company" as a green check
+
 
   #########################
   # Job Title validations #
@@ -126,15 +152,36 @@ Feature: Step0 Validations
     And I should not see "Job title is too short."
     And I should not see "Job title is too long."   
 
-  @javascript 
-  Scenario: The phone number should be exactly 10 digits
+  ############################
+  # Phone number validations #
+  ############################
+  @javascript
+  Scenario: The mobile phone number is required and needs to have more that 9 numbers and the field checker needs to show field status
     Given I am on the homepage
-    When I fill in "signup-mobile-number" with "1"
+    When I fill in "signup-mobile-number" with "123"
     Then I should see "Mobile number is too short."
+    And I should not see "Mobile number is required."
+    And I should not see "Mobile number is too long."
+    And I should see the input validation checkbox for "signup-mobile-number" as a red cross
+    And I should not see the input validation checkbox for "signup-mobile-number" as a green check
     When I fill in "signup-mobile-number" with ""
     Then I should see "Mobile number is required."
-    When I fill in "signup-mobile-number" with "12345678901"
+    And I should not see "Mobile number is too short."
+    And I should not see "Mobile number is too long."
+    And I should see the input validation checkbox for "signup-mobile-number" as a red cross
+    And I should not see the input validation checkbox for "signup-mobile-number" as a green check
+    When I fill in "signup-mobile-number" with "12345678901" 
     Then I should see "Mobile number is too long."
+    And I should not see "Mobile number is too short."
+    And I should not see "Mobile number is required."
+    And I should see the input validation checkbox for "signup-mobile-number" as a red cross
+    And I should not see the input validation checkbox for "signup-mobile-number" as a green check
+    When I fill in "signup-mobile-number" with "1234567890"
+    Then I should not see the input validation checkbox for "signup-mobile-number" as a red cross
+    And I should see the input validation checkbox for "signup-mobile-number" as a green check
+    And I should not see "Mobile number is required."
+    And I should not see "Mobile number is too short."
+    And I should not see "Mobile number is too long."   
 
   @javascript 
   Scenario: The email address should be valid
