@@ -19,22 +19,71 @@ Feature: Step0 Validations
     Given I am on the homepage
     Then the button "signup-submit" should be disabled
 
-  @javascript 
-  Scenario: The first name is required and needs to have more that 1 char
+  ##########################
+  # First Name validations #
+  ##########################
+  @javascript
+  Scenario: The first name is required and needs to have more that 1 char and the field checker needs to show field status
     Given I am on the homepage
     When I fill in "signup-first-name" with "A"
     Then I should see "First name is too short."
-    Then I fill in "signup-first-name" with ""
+    And I should not see "First name is required."
+    And I should not see "First name is too long."
+    And I should see the input validation checkbox for "signup-first-name" as a red cross
+    And I should not see the input validation checkbox for "signup-first-name" as a green check 
+    When I fill in "signup-first-name" with ""
     Then I should see "First name is required."
+    And I should not see "First name is too short."
+    And I should not see "First name is too long."
+    And I should see the input validation checkbox for "signup-first-name" as a red cross
+    And I should not see the input validation checkbox for "signup-first-name" as a green check
+    When I fill in "signup-first-name" with "Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" 
+    Then I should see "First name is too long."
+    And I should not see "First name is too short."
+    And I should not see "First name is required."
+    And I should see the input validation checkbox for "signup-first-name" as a red cross
+    And I should not see the input validation checkbox for "signup-first-name" as a green check
+    When I fill in "signup-first-name" with "John"
+    Then I should not see the input validation checkbox for "signup-first-name" as a red cross
+    And I should see the input validation checkbox for "signup-first-name" as a green check
+    And I should not see "First name is required."
+    And I should not see "First name is too short."
+    And I should not see "First name is too long."    
 
-  @javascript 
-  Scenario: The last name is required and needs to have more that 1 char
+  #########################
+  # Last Name validations #
+  #########################
+  @javascript
+  Scenario: The last name is required and needs to have more that 1 char and the field checker needs to show field status
     Given I am on the homepage
     When I fill in "signup-last-name" with "A"
     Then I should see "Last name is too short."
-    Then I fill in "signup-last-name" with ""
+    And I should not see "Last name is required."
+    And I should not see "Last name is too long."
+    And I should see the input validation checkbox for "signup-last-name" as a red cross
+    And I should not see the input validation checkbox for "signup-last-name" as a green check
+    When I fill in "signup-last-name" with ""
     Then I should see "Last name is required."
+    And I should not see "Last name is too short."
+    And I should not see "Last name is too long."
+    And I should see the input validation checkbox for "signup-last-name" as a red cross
+    And I should not see the input validation checkbox for "signup-last-name" as a green check
+    When I fill in "signup-last-name" with "Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" 
+    Then I should see "Last name is too long."
+    And I should not see "Last name is too short."
+    And I should not see "Last name is required."
+    And I should see the input validation checkbox for "signup-last-name" as a red cross
+    And I should not see the input validation checkbox for "signup-last-name" as a green check
+    When I fill in "signup-last-name" with "John"
+    Then I should not see the input validation checkbox for "signup-last-name" as a red cross
+    And I should see the input validation checkbox for "signup-last-name" as a green check
+    And I should not see "Last name is required."
+    And I should not see "Last name is too short."
+    And I should not see "Last name is too long." 
 
+  #######################
+  # Company validations #
+  #######################
   @javascript 
   Scenario: The last name is required and needs to have more that 1 char
     Given I am on the homepage
@@ -46,13 +95,36 @@ Feature: Step0 Validations
     And I wait for 3 seconds
     Then I should see "Company was not found."
 
-  @javascript 
-  Scenario: The job title is required and needs to have more that 1 char
+  #########################
+  # Job Title validations #
+  #########################
+  @javascript
+  Scenario: The job title is required and needs to have more that 1 char and the field checker needs to show field status
     Given I am on the homepage
     When I fill in "signup-job-title" with "A"
     Then I should see "Job title is too short."
-    Then I fill in "signup-job-title" with ""
-    Then I should see "Job title is required."    
+    And I should not see "Job title is required."
+    And I should not see "Job title is too long."
+    And I should see the input validation checkbox for "signup-job-title" as a red cross
+    And I should not see the input validation checkbox for "signup-job-title" as a green check
+    When I fill in "signup-job-title" with ""
+    Then I should see "Job title is required."
+    And I should not see "Job title is too short."
+    And I should not see "Job title is too long."
+    And I should see the input validation checkbox for "signup-job-title" as a red cross
+    And I should not see the input validation checkbox for "signup-job-title" as a green check
+    When I fill in "signup-job-title" with "Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa" 
+    Then I should see "Job title is too long."
+    And I should not see "Job title is too short."
+    And I should not see "Job title is required."
+    And I should see the input validation checkbox for "signup-job-title" as a red cross
+    And I should not see the input validation checkbox for "signup-job-title" as a green check
+    When I fill in "signup-job-title" with "John"
+    Then I should not see the input validation checkbox for "signup-job-title" as a red cross
+    And I should see the input validation checkbox for "signup-job-title" as a green check
+    And I should not see "Job title is required."
+    And I should not see "Job title is too short."
+    And I should not see "Job title is too long."   
 
   @javascript 
   Scenario: The phone number should be exactly 10 digits

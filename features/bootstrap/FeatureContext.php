@@ -20,6 +20,67 @@ use Behat\MinkExtension\Context\MinkContext;
  */
 class FeatureContext extends MinkContext
 {
+
+    /**
+     * @Given /^I should see the input validation checkbox for "([^"]*)" as a red cross$/
+     */
+    public function iShouldSeeTheInputValidationCheckboxForAsARedCross($cssSelector)
+    {
+        $session = $this->getSession();
+        $redCrossVisible = $session->evaluateScript(
+            "(function(){ return $('#".$cssSelector."').next('span').find('i').next().is(':visible'); })()"
+        );
+
+        if (!$redCrossVisible) {
+            throw new \InvalidArgumentException(sprintf('The validation icon red cross for %s is not visible!', $cssSelector));
+        }
+    }
+
+    /**
+     * @Then /^I should see the input validation checkbox for "([^"]*)" as a green check$/
+     */
+    public function iShouldSeeTheInputValidationCheckboxForAsAGreenCheck($cssSelector)
+    {
+        $session = $this->getSession();
+        $greenCheckVisible = $session->evaluateScript(
+            "(function(){ return $('#".$cssSelector."').next('span').find('i').first().is(':visible'); })()"
+        );
+
+        if (!$greenCheckVisible) {
+            throw new \InvalidArgumentException(sprintf('The validation icon green check for %s is not visible!', $cssSelector));
+        }
+    }
+
+    /**
+     * @Given /^I should not see the input validation checkbox for "([^"]*)" as a green check$/
+     */
+    public function iShouldNotSeeTheInputValidationCheckboxForAsAGreenCheck($cssSelector)
+    {
+        $session = $this->getSession();
+        $greenCheckVisible = $session->evaluateScript(
+            "(function(){ return $('#".$cssSelector."').next('span').find('i').first().is(':visible'); })()"
+        );
+
+        if ($greenCheckVisible) {
+            throw new \InvalidArgumentException(sprintf('The validation icon green check for %s is visible!', $cssSelector));
+        }
+    }
+
+    /**
+     * @Then /^I should not see the input validation checkbox for "([^"]*)" as a red cross$/
+     */
+    public function iShouldNotSeeTheInputValidationCheckboxForAsARedCross($cssSelector)
+    {
+                $session = $this->getSession();
+        $redCrossVisible = $session->evaluateScript(
+            "(function(){ return $('#".$cssSelector."').next('span').find('i').next().is(':visible'); })()"
+        );
+
+        if ($redCrossVisible) {
+            throw new \InvalidArgumentException(sprintf('The validation icon red cross for %s is visible!', $cssSelector));
+        }
+    }
+
     /**
      * Initializes context.
      * Every scenario gets its own context object.

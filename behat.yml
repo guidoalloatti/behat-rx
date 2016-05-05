@@ -2,7 +2,7 @@ default:
   extensions:
     Behat\MinkExtension\Extension:
       base_url: localhost:8000
-      browser_name: chrome
+      #browser_name: chrome
       goutte: ~
       selenium2: ~  
 
